@@ -1,0 +1,11 @@
+venv/
+__pycache__/
+*.pyc
+.env
+test_groq.py
+vectorstore/
+data/
+*.csv
+*.json
+*.xml
+*.pdf
