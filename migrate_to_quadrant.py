@@ -12,8 +12,11 @@ from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams
 
 # ── Config ─────────────────────────────────────────────────────
-QDRANT_URL      = "your_cluster_url_here"
-QDRANT_API_KEY  = "your_api_key_here"
+import os
+from dotenv import load_dotenv
+load_dotenv()
+QDRANT_URL      = os.getenv("QDRANT_URL")
+QDRANT_API_KEY  = os.getenv("QDRANT_API_KEY")
 COLLECTION_NAME = "medical_rag"
 LOCAL_VECTORSTORE_PATH = "./vectorstore"
 
