@@ -1,12 +1,12 @@
 # MedRAG — Health Intelligence Chatbot
 
-A Retrieval-Augmented Generation (RAG) chatbot that answers general health questions using a curated set of medical documents (MedlinePlus articles, PubMedQA, MedQuAD, and symptom-severity data). It combines local embeddings, a cloud vector database, and a fast LLM to ground its answers in real source material instead of hallucinating.
+A Retrieval-Augmented Generation (RAG) chatbot that answers general health questions using a curated set of medical documents (MedlinePlus articles, PubMedQA, MedQuAD). It combines local embeddings, a cloud vector database, and a fast LLM to ground its answers in real source material instead of hallucinating.
 
 > ⚠️ **Disclaimer**: This project is for informational/educational purposes only and is **not** a substitute for professional medical advice, diagnosis, or treatment.
 
 ## How it works
 
-1. **Ingestion** (`ingest.py`) — Loads source documents from `data/` (PDFs, PubMedQA JSON, MedQuAD XML, symptom-severity CSV), splits them into chunks, embeds them locally with Ollama, and stores them in a local Chroma vector store (`vectorstore/`).
+1. **Ingestion** (`ingest.py`) — Loads source documents from `data/` (PDFs, PubMedQA JSON, MedQuAD XML), splits them into chunks, embeds them locally with Ollama, and stores them in a local Chroma vector store (`vectorstore/`).
 2. **Migration** (`migrate_to_quadrant.py`) — Uploads the local Chroma vector store to a Qdrant Cloud collection (`medical_rag`), with batching/retry/resume support for large uploads.
 3. **API** (`main.py`) — A FastAPI backend that embeds the incoming question, retrieves the top matching chunks from Qdrant, and passes them as context to a Groq-hosted LLM to generate a grounded answer, along with the source documents used.
 4. **Frontend** (`Frontend/index.html`) — A single-page static UI that calls the API and displays the answer and sources.
